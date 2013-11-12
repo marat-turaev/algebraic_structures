@@ -7,7 +7,6 @@ import filereader
 
 debug = False
 
-
 class MarkovNode(object):
 	def __init__(self, token):
 		self.token = token
@@ -37,7 +36,6 @@ class Markov(object):
 			postfix = words[i + order:i + order + 1] #it is single
 			key_value.append((key, prefix, body, postfix))
 
-		#-hack? -no
 		last = " ".join(words[-order:]);
 		self.nodes[last] = MarkovNode(last)
 
@@ -59,13 +57,23 @@ class Markov(object):
 				self.nodes[kv[0]].add_node(self.nodes[" ".join(kv[2] + [postfix])], probability, postfix)
 
 
+def is_problem(token):
+	questions = ["Доказать", "Найти", "Существует", "Показать", "Является", "Какие", "Указать", "Выпишите", "Описать", "Привидите", "Построить"]
+	for question in questions:
+		if token.startswith(question): return True
+	return False
+
+def is_stop(token):
+	stops = ".?!;"
+	if token in stops: return True
+	return False
+
 def main():
 	words = filereader.read_grf()
-
 	markov = Markov(words, 3)
 	rnd = randint(0, len(markov.nodes) - 1)
 	node = markov.nodes.values()[rnd];
-	while not node.token.startswith("Доказать"):
+	while not is_problem(node.token):
 		rnd = randint(0, len(markov.nodes) - 1)
 		node = markov.nodes.values()[rnd];
 
@@ -78,8 +86,8 @@ def main():
 		next_token = next_node[1]
 		print next_token,
 		node = next_node[0]
-		if next_token == ".": dots += 1
-		if dots == 3: return #enough
+		if is_stop(next_token): dots += 1
+		if dots == 1: return #enough
 
 
 if __name__ == '__main__':

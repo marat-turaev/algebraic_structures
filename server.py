@@ -2,14 +2,15 @@
 # coding: utf8
 
 import flask
-
+from markov import markov
 
 app = flask.Flask(__name__)
  
 
 @app.route('/')
 def index():
-    return flask.render_template('index.html', task='Text of the task')
+    task = markov.generate(2).decode('utf8')
+    return flask.render_template('index.html', task=task)
 
 
 @app.route('/download/', methods=['GET', 'POST'])

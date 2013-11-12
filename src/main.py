@@ -65,7 +65,7 @@ def main():
 	markov = Markov(words, 3)
 	rnd = randint(0, len(markov.nodes) - 1)
 	node = markov.nodes.values()[rnd];
-	while not (node.token[0].isupper()):
+	while not node.token.startswith("Доказать"):
 		rnd = randint(0, len(markov.nodes) - 1)
 		node = markov.nodes.values()[rnd];
 

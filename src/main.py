@@ -51,8 +51,6 @@ class Markov(object):
 				self.nodes[kv[0]].add_node(self.nodes[" ".join(kv[2] + [postfix])], probability, postfix)
 
 def main():
-
-	# words = ["a", "b", ",", "a", "b", "c", ",", "b"]
 	words = filereader.read_grf()
 
 	markov = Markov(words, 2)
@@ -62,7 +60,6 @@ def main():
 		rnd = randint(0, len(markov.nodes)-1)
 		node = markov.nodes.values()[rnd];	
 
-	# node = markov.nodes.itervalues().next();#markov.nodes["a"];
 	print node.token, 
 
 	for i in range(100):
@@ -70,8 +67,6 @@ def main():
 		if len(node.next) == 0: return #final node
 		print next_node[1],
 		node = next_node[0]
-
-
 
 if __name__ == '__main__':
 	main()

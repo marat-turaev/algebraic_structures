@@ -31,13 +31,13 @@ class Markov(object):
         matrix = {}
         key_value = []
         for i in range(len(words) - order):
-            prefix = words[i: i + 1];
+            prefix = words[i: i + 1]
             body = words[i + 1: i + order]
             key = " ".join(prefix + body)
             postfix = words[i + order:i + order + 1] #it is single
             key_value.append((key, prefix, body, postfix))
 
-        last = " ".join(words[-order:]);
+        last = " ".join(words[-order:])
         self.nodes[last] = MarkovNode(last)
 
         for kv in key_value:
@@ -52,14 +52,14 @@ class Markov(object):
             if len(self.nodes[kv[0]].next) != 0: continue
             total_references = sum(matrix[kv[0]].values())
             for postfix in matrix[kv[0]].keys():
-                probability = matrix[kv[0]][postfix] / total_references;
+                probability = matrix[kv[0]][postfix] / total_references
                 if debug: print "Added next node to: ", self.nodes[kv[0]].token, " this node: ", " ".join(
                     kv[2] + [postfix]), " with probability: ", probability, " with reference: ", postfix
                 self.nodes[kv[0]].add_node(self.nodes[" ".join(kv[2] + [postfix])], probability, postfix)
 
 
 def is_problem(token):
-    questions = ["Доказать", "Найти", "Существует", "Показать", "Является", "Какие", "Указать", "Выпишите", "Описать", "Привидите", "Построить"]
+    questions = ["Доказать", "Найти", "Существует", "Показать", "Является", "Какие", "Указать", "Выпишите", "Описать", "Приведите", "Построить"]
     for question in questions:
         if token.startswith(question): return True
     return False
@@ -73,10 +73,10 @@ def generate(precision):
     words = filereader.read_grf()
     markov = Markov(words, precision)
     rnd = randint(0, len(markov.nodes) - 1)
-    node = markov.nodes.values()[rnd];
+    node = markov.nodes.values()[rnd]
     while not is_problem(node.token):
         rnd = randint(0, len(markov.nodes) - 1)
-        node = markov.nodes.values()[rnd];
+        node = markov.nodes.values()[rnd]
 
     result = node.token
 

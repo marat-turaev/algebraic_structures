@@ -16,4 +16,4 @@ def read_grf():
     Возвращает список слов из файла 'texts/grf_processed_2.txt',
     содержащего обработанные задачи с замененными формулами.
     """
-    return read_file('../texts/grf_processed_2.txt')
+    return read_file('../texts/grf_processed_3.txt')

@@ -33,6 +33,7 @@ class Markov(object):
         for i in range(len(words) - order):
             prefix = words[i: i + 1]
             body = words[i + 1: i + order]
+            key = prefix[0]
             key = " ".join(prefix + body)
             postfix = words[i + order:i + order + 1] #it is single
             key_value.append((key, prefix, body, postfix))
@@ -65,7 +66,7 @@ def is_problem(token):
     return False
 
 def is_stop(token):
-    stops = ".?!;"
+    stops = ".?!"
     if token in stops: return True
     return False
 
@@ -85,16 +86,21 @@ def generate(precision):
         next_node = node.next_node()
         if len(node.next) == 0: break #final node
         next_token = next_node[1]
-        if not next_token in string.punctuation:
-            result += " "
-        result += next_token
+        result += " " + next_token
         node = next_node[0]
         if is_stop(next_token): dots += 1
         if dots == 1: break #enough
-
-    if result[-1] == ';':
-        result = result[:-1] + '.'
-    return result
+        
+    r = ""
+    i = 0
+    while i < len(result):
+        if result[i] == " ":
+            if not (i < len(result) - 1 and result[i+1] in string.punctuation): 
+                r += result[i]
+        else:
+            r += result[i]
+        i += 1
+    return r
 
 def generate_tex(count):
     result = "\\begin{enumerate}[1.]\n" 

@@ -3,14 +3,13 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
 		<link href="../static/bootstrap.min.css" rel="stylesheet">
-		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 	    <link href="../static/jumbotron-narrow.css" rel="stylesheet">
 		<title>Генератор задач по алгебраическим структурам</title>
 	</head>
 	<body>
 		<div class="container">
 			<div class="header">
-				<h3 class="text-muted">Devdays: evilGen</h3>
+				<h3 class="text-muted">Devdays 2013</h3>
 			</div>
 			<div class="jumbotron">
 				<h1>Генератор задач по алгебре</h1>
@@ -33,13 +32,12 @@
 						<h5 class="text-danger">Хочу много задач!</h5>
 					</div>
 					<div class="col-xs-3">
-						<input type="text" class="form-control" required placeholder="Сколько?">
+						<input name="number" type="text" class="form-control" required placeholder="Сколько?">
 					</div>
 					<div class="col-xs-3">
 						<button type="submit" class="btn btn-success tn-block form-control">Скачать .tex</button>
 					</div>
 				</div>
-
 			</form>
 		</div>
 	</body>

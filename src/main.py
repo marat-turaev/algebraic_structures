@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import division
 from random import random
 from random import randint
@@ -46,8 +47,7 @@ class Markov(object):
 			total_references = sum(matrix[kv[0]].values())
 			for postfix in matrix[kv[0]].keys():
 				probability = matrix[kv[0]][postfix] / total_references;
-				print probability
-				print "Adding next to node: ", self.nodes[kv[0]].token, " this node: ", " ".join(kv[2] + [postfix]), " with prob: ", probability, " with reference ", postfix
+				print "Added next node to: ", self.nodes[kv[0]].token, " this node: ", " ".join(kv[2] + [postfix]), " with probability: ", probability, " with reference: ", postfix
 				self.nodes[kv[0]].add_node(self.nodes[" ".join(kv[2] + [postfix])], probability, postfix)
 
 def main():
@@ -57,13 +57,17 @@ def main():
 
 	markov = Markov(words, 2)
 	rnd = randint(0, len(markov.nodes)-1)
-	node = markov.nodes.values()[rnd];
+	node = markov.nodes.values()[rnd];	
+	while not (node.token.startswith('Доказать') or node.token.startswith('Пусть')):
+		rnd = randint(0, len(markov.nodes)-1)
+		node = markov.nodes.values()[rnd];	
+
 	# node = markov.nodes.itervalues().next();#markov.nodes["a"];
 	print node.token, 
 
 	for i in range(100):
 		next_node = node.next_node()
-		if len(node.next) == 0: return
+		if len(node.next) == 0: return #final node
 		print next_node[1],
 		node = next_node[0]
 

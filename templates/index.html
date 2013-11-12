@@ -1,22 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-        <title>Генератор задач по алгебраическим структурам</title>
-    </head>
-    <body>
-        <div id="task">
-            <h1>Генератор задач по алгебраическим структурам</h1>
-            <p>{{ task }}</p>
-        <div>
-        <div id="download">
-            <h2>Можно скачать задачи в tex:</h2>
-            <form action="/download/" method="POST">
-                <p><input name="number" type="text" size="10" value="10">
-                   <input type="submit"></p>
-            </form>
-        </div>
-    </body>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+		<link href="../static/bootstrap.min.css" rel="stylesheet">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	    <link href="../static/jumbotron-narrow.css" rel="stylesheet">
+		<title>Генератор задач по алгебраическим структурам</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h3 class="text-muted">Devdays: evilGen</h3>
+			</div>
+			<div class="jumbotron">
+				<h1>Генератор задач по алгебре</h1>
+				<p class="lead">{{ task }}</p>
+				<a class="btn btn-lg btn-primary" href="" role="button">Новая задача</a>
+			</div>
+			<div class="row marketing">
+				<div class="col-lg-6">
+					<h4>Студенту</h4>
+					<p>Теперь наслаждаться домашним заданием по алгебре можно бесконечно.</p>
+				</div>
+				<div class="col-lg-6">
+					<h4>Преподавателю</h4>
+					<p>Хватит тратить время на выдумывание задач, просто скачивай задачи отсюда!</p>
+				</div>
+			</div>
+			<form class="form-inline" action="/download/" method="POST">
+				<div class="row">
+					<div class="col-xs-3">
+						<h5 class="text-danger">Хочу много задач!</h5>
+					</div>
+					<div class="col-xs-3">
+						<input type="text" class="form-control" required placeholder="Сколько?">
+					</div>
+					<div class="col-xs-3">
+						<button type="submit" class="btn btn-success tn-block form-control">Скачать .tex</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</body>
 </html>

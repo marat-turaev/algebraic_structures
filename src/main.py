@@ -4,6 +4,7 @@ from __future__ import division
 from random import random
 from random import randint
 import filereader
+import string
 
 debug = False
 
@@ -68,27 +69,38 @@ def is_stop(token):
 	if token in stops: return True
 	return False
 
-def main():
+def generate(precision):
 	words = filereader.read_grf()
-	markov = Markov(words, 3)
+	markov = Markov(words, precision)
 	rnd = randint(0, len(markov.nodes) - 1)
 	node = markov.nodes.values()[rnd];
 	while not is_problem(node.token):
 		rnd = randint(0, len(markov.nodes) - 1)
 		node = markov.nodes.values()[rnd];
 
-	print node.token,
+	result = node.token
 
 	dots = 0
-	for i in range(10000):
+	while True:
 		next_node = node.next_node()
-		if len(node.next) == 0: return #final node
+		if len(node.next) == 0: return result #final node
 		next_token = next_node[1]
-		print next_token,
+		if not next_token in string.punctuation:
+			result += " "
+		result += next_token
 		node = next_node[0]
 		if is_stop(next_token): dots += 1
-		if dots == 1: return #enough
+		if dots == 1: return result #enough
 
+def generate_tex(count):
+	result = "\\begin{enumerate}[1.]\n" 
+	for i in range(count):
+		result += "\t\item " + generate(3) +  '\n'
+	result += "\\end{enumerate}"
+	return result
+
+def main():
+	print generate_tex(4)
 
 if __name__ == '__main__':
 	main()

@@ -8,7 +8,7 @@ def read_file(path):
     """
     with open(path, 'r') as src:
         text = src.read().strip()
-    return text.split()
+    return text.split('\n')
 
 
 def read_grf():

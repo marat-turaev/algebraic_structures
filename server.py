@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # coding: utf8
 
+import tex
 import flask
 from markov import markov
 
@@ -31,9 +32,16 @@ def download():
             return flask.render_template('error.html',
                                          msg=u'Задано слишком большое число задач.')
 
-    tex = markov.generate_tex(number)
-    response = flask.make_response(tex)
-    response.headers['Content-Type'] = 'application/x-tex'
+    docType = flask.request.form['type']
+    if not docType in ['x-tex','pdf']:
+        return flask.render_template('error.html',
+                                     msg=u'Задан неверный тип документа.')
+
+    data = markov.generate_tex(number)
+    if docType == 'pdf':
+        data = tex.latex2pdf(data.decode('utf8'))
+    response = flask.make_response(data)
+    response.headers['Content-Type'] = 'application/%s' % docType
     response.headers['Content-Disposition'] = 'attachment; filename="tasks"'
     return response
  

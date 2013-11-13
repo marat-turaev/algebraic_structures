@@ -103,10 +103,10 @@ def generate(precision):
     return r
 
 def generate_tex(count):
-    result = "\\begin{enumerate}[1.]\n" 
+    result = '\\documentclass[12pt]{article}\n\\usepackage[utf8x]{inputenc}\n\\usepackage[russian]{babel}\n\n\\begin{document}\n\t\\begin{enumerate}\n'
     for i in range(count):
-        result += "\t\item " + generate(3) +  '\n'
-    result += "\\end{enumerate}"
+        result += '\t\t\item ' + generate(3) +  '\n'
+    result += '\t\\end{enumerate}\n\\end{document}'
     return result
 
 def main():

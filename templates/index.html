@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
-		<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-		<link href="{{ url_for('static', filename='jumbotron-narrow.css') }}" rel="stylesheet" type="text/css">
-		<script type="text/x-mathjax-config">
-			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-		</script>
-		<script type="text/javascript"
-			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
-		<title>Генератор задач по алгебраическим структурам</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<h3 class="text-muted">Devdays 2013</h3>
-			</div>
-			<div class="jumbotron">
-				<h1>Генератор задач по алгебре</h1>
-				<p class="lead">{{ task }}</p>
-				<a class="btn btn-lg btn-primary" href="" role="button">Новая задача</a>
-			</div>
-			<div class="row marketing">
-				<div class="col-lg-6">
-					<h4>Студенту</h4>
-					<p>Теперь наслаждаться домашним заданием по алгебре можно бесконечно.</p>
-				</div>
-				<div class="col-lg-6">
-					<h4>Преподавателю</h4>
-					<p>Хватит тратить время на выдумывание задач, просто скачивай задачи отсюда!</p>
-				</div>
-			</div>
-			<form class="form-inline" action="/download/" method="POST">
-				<div class="row">
-					<div class="col-xs-3">
-						<h5 class="text-danger">Хочу много задач!</h5>
-					</div>
-					<div class="col-xs-3">
-						<input name="number" type="text" class="form-control" required placeholder="Сколько?">
-					</div>
-					<div class="col-xs-3">
-						<button type="submit" class="btn btn-success tn-block form-control">Скачать .tex</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+        <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='jumbotron-narrow.css') }}" rel="stylesheet" type="text/css">
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <title>Генератор задач по алгебраическим структурам</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h3 class="text-muted">Devdays 2013</h3>
+            </div>
+            <div class="jumbotron">
+                <h1>Генератор задач по алгебре</h1>
+                <p class="lead">{{ task }}</p>
+                <a class="btn btn-lg btn-primary" href="" role="button">Новая задача</a>
+            </div>
+            <div class="row marketing">
+                <div class="col-lg-6">
+                    <h4>Студенту</h4>
+                    <p>Теперь наслаждаться домашним заданием по алгебре можно бесконечно.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Преподавателю</h4>
+                    <p>Хватит тратить время на выдумывание задач, просто скачивай задачи отсюда!</p>
+                </div>
+            </div>
+            <form class="form-inline" action="/download/" method="POST">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h5 class="text-danger">Хочу много задач!</h5>
+                    </div>
+                    <div class="col-xs-3">
+                        <input name="number" type="text" class="form-control" required placeholder="Сколько?">
+                        <input id="type" name="type" type="hidden" value="none">
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="submit" class="btn btn-success tn-block form-control"
+                         onclick="document.getElementById('type').value = 'pdf'">Скачать .pdf</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="submit" class="btn btn-success tn-block form-control"
+                         onclick="document.getElementById('type').value = 'x-tex'">Скачать .tex</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>

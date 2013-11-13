@@ -95,7 +95,7 @@ def generate(precision):
     i = 0
     while i < len(result):
         if result[i] == " ":
-            if not (i < len(result) - 1 and result[i+1] in string.punctuation): 
+            if not (i < len(result) - 1 and result[i+1] in '\.,:;!?'):# string.punctuation): 
                 r += result[i]
         else:
             r += result[i]

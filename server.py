@@ -27,7 +27,7 @@ def download():
         if number <= 0:
             return flask.render_template('error.html',
                                          msg=u'Задано слишком маленькое число задач.')
-        if number > 100:
+        if number > 200:
             return flask.render_template('error.html',
                                          msg=u'Задано слишком большое число задач.')
 

@@ -1,0 +1,8 @@
+Requirments:
+	python2.7
+	pip
+Install:
+	Install flask: "sudo pip install flask"
+	Install tex: "sudo pip install tex"
+Run:
+	./server.py
